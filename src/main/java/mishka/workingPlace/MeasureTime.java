@@ -1,7 +1,7 @@
 package mishka.workingPlace;
 /**
  * Класс MeasureTime представляет собой реализацию вычисление времени работы разных методов
- * коллекций ArrayList и LinkedList при работе с "int" переменными
+ * созданных коллекций ArrayList и LinkedList при работе с "int" переменными
  *
  * @author Mishka2374
  */
@@ -190,6 +190,5 @@ public class MeasureTime {
                 times[7][1] = sizeTesting(list, numElements);
                 times[8][1] = clearTesting(list, numElements);
         }
-
 
 }

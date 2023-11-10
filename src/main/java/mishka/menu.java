@@ -1,23 +1,25 @@
 package mishka;
 import mishka.workingPlace.MeasureTime;
+import mishka.workingPlace.MeasureTimeForCollections;
 
 import java.util.Scanner;
 /**
  * Класс menu представляет собой реализацию работы "меню" упрощённой работы
  * с чем-либо. В данном случае меню работает для сравнения разных методов
- * коллекций ArrayList и LinkedList
+ * коллекций ArrayList и LinkedList, встроенных и созданных
  *
  * @author Mishka2374
  */
 public class menu {
     /**
      * Метод для реализации составления сравнительной таблицы
-     * методов коллекций ArrayList и LinkedList
+     * методов коллекций ArrayList и LinkedList. Коллекции встроенные и свои созданные
      */
     public static void answer()
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Здравствуйте, Вас приветствует МЕНЮ \n по сравнению работы методов коллекций ArrayList и LinkedList.\nПожалуйста, укажите количество повторений:");
+        System.out.println("Здравствуйте, Вас приветствует МЕНЮ \n по сравнению работы методов " +
+                "коллекций ArrayList и LinkedList (встроенных и созданных).\nПожалуйста, укажите количество повторений:");
         //Повтор на правильный ввод значения
         int numElements;
         do {
@@ -46,6 +48,8 @@ public class menu {
             x = scanner.nextInt();
             long[][] times = new long[9][3];
             MeasureTime.timeWorking(times, numElements); //Посчитали все значения
+            long[][] times2 = new long[9][3];
+            MeasureTimeForCollections.timeWorkingForCollections(times2, numElements); //Посчитали все значения
 
             switch (x) {
                 case 0:
@@ -67,13 +71,15 @@ public class menu {
                 case 1:
                     print();
                     for (int i = 0; i < 9; i++) {
-                        System.out.printf("%-9s %-3s %-15s %-15s %-15s",methods[i],"|",times[i][0] + " ns",times[i][1] + " ns", numElements );
+                        System.out.printf("%-9s %-3s %-15s %-15s %-15s %-15s %-15s",
+                                methods[i],"|",times2[i][0] + " ns",times2[i][1] + " ns" ,times[i][0] + " ns",times[i][1] + " ns", numElements );
                         System.out.println();
                     }
                     break;
                 case 2, 3, 4, 5, 6, 7, 8, 9, 10:
                     print();
-                    System.out.printf("%-9s %-3s %-15s %-15s %-18s",methods[x-2],"|",times[x-2][0] + " ns",times[x-2][1] + " ns", numElements);
+                    System.out.printf("%-9s %-3s %-15s %-15s %-15s %-15s %-18s",
+                            methods[x-2],"|",times2[x-2][0] + " ns",times2[x-2][1] + " ns" ,times[x-2][0] + " ns",times[x-2][1] + " ns", numElements);
                     break;
                 case 11:
                     MeasureTime.timeWorking(times, numElements);
@@ -83,6 +89,7 @@ public class menu {
                     numElements = scanner.nextInt();
                     System.out.println("Количество повторений изменено!");
                     MeasureTime.timeWorking(times, numElements);
+                    MeasureTimeForCollections.timeWorkingForCollections(times2, numElements);
                     System.out.println("Таблица времени изменена!");
                     break;
                 default:
@@ -93,7 +100,8 @@ public class menu {
     }
 
     private static void print() {
-        System.out.printf("%-9s %-3s %-15s %-15s %-15s%n", "Method", "|", "ArrayList", "LinkedList", "Repeats");
-        System.out.println("__________|___________________________________________");
+        System.out.printf("%-9s %-3s %-15s %-15s %-15s %-15s %-15s%n",
+                "Method", "|", "ArrayList", "LinkedList", "MyArrayList", "MyLinkedList", "Repeats");
+        System.out.println("__________|_____________________________________________________________________________");
     }
 }
